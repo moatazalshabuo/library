@@ -83,7 +83,7 @@
                             @error('name')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
-                            <table classc="table">
+                            <table class="table">
                                 <thead>
                                   <tr>
                                     <th>اسم المقرر</th>

@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{URL::asset('assets/css/templatemo-seo-dream.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/animated.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/owl.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     
     <!--
 
@@ -94,7 +95,14 @@ https://templatemo.com/tm-563-seo-dream
   <script src="{{URL::asset('assets/js/owl-carousel.js')}}"></script>
   {{-- <script src="{{URL::asset('assets/js/animation.js')}}"></script> --}}
   <script src="{{URL::asset('assets/js/imagesloaded.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
   {{-- bootstrap.min --}}
   @yield('script')
+  <script>
+    $(function(){
+      $("select").select2()
+    })
+    </script>
 </body>
 </html>

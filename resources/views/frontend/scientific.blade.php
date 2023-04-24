@@ -40,8 +40,8 @@
                                     <p> </p>
                                 
                                 <div class="d-flex justify-content-center mt-1">
+                                  <a class="btn btn-primary btn-icon m-1 text-white" href="/upload/scienthfc/{{$item->file}}"><i class="fa fa-download"></i></a>                                        
                                     @if (Auth::user()->role == 1)
-                                    <a class="btn btn-primary btn-icon m-1 text-white"><i class="fa fa-download"></i></a>                                        
                                     {{-- <button class="btn btn-info btn-icon m-1 text-white hide-book" ><i class="fa fa-eye-slash"></i></button> --}}
                                     <a href="{{ route('deletescie',$item->id) }}" class="btn btn-danger btn-icon m-1 text-white"><i class="fa fa-trash"></i></a>
                                     <a class="btn btn-warning btn-icon m-1 text-white" href="{{ route('editscie',$item) }}"><i class="fa fa-edit"></i></a>

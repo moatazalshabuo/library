@@ -32,7 +32,7 @@
                     <small>{{ $item->semester }}/{{ $item->year }}</small>
                   </div>
                   <div>
-                    <a class="badge bg-primary rounded-pill" href="#" class="text-white"><i class="fa fa-download"></i></a>
+                    <a class="badge bg-primary rounded-pill" href="upload/{{$item->depart_code}}/{{$item->course_code}}/{{$item->file}}" class="text-white"><i class="fa fa-download"></i></a>
                     @if (Auth::user()->role == 1)
                     <a class="badge bg-danger rounded-pill" href="{{ route("lectures.delete",$item->id) }}" class="text-white"><i class="fa fa-trash"></i></a>
                     <a class="badge bg-warning rounded-pill" href="{{ route("lectures.edit",$item->id) }}" class="text-white"><i class="fa fa-edit"></i></a>    

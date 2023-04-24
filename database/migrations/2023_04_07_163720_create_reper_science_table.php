@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("sp_name",40);
             $table->boolean("status")->default(0);
             $table->string('emz',30);
-            $table->date('year_post');            
+            $table->string('year_post');            
             $table->timestamps();
         });
     }
