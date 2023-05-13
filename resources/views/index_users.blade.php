@@ -8,6 +8,14 @@
         @if (session()->has('add'))
         <div class="alert alert-warning">{{ session()->get('add') }}</div>            
         @endif
+
+        @if (session()->has('warning'))
+        <div class="alert alert-warning">{{ session()->get('warning') }}</div>            
+        @endif
+
+        @if (session()->has('success'))
+        <div class="alert alert-success">{{ session()->get('success') }}</div>            
+        @endif
         <div class="col-lg-12">
           <div class="features-content px-2" style="overflow: hidden">
             <div class="row">
@@ -26,13 +34,14 @@
                   
                 </form>
               </div>
-              <table class="table">
+              <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>الاسم</th>
                         <th> الوظيفي/رقم القيد</th>
                         <th>الرقم الوطني</th>
                         <th>البريد الالكتروني</th>
+                        <th>النقاط</th>
                         <th>الصفة</th>
                         <th>الحالة</th>
                         <th>حذف</th>
@@ -45,6 +54,7 @@
                         <td>{{ $item->No_academic }}</td>
                         <td>{{$item->id_number}}</td>
                         <td>{{ $item->email }}</td>
+                        <td><span>عدد النقاط - {{ $item->point }}</span><a href="{{ route('addpoint',$item->id) }}" class="btn btn-outline-success">اضافة نقاط </a></td>
                         <td>@if ($item->role == 1)
                             مسؤؤول المكتبة
                         @elseif($item->role == 2) 

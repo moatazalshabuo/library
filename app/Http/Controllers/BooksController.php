@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Books;
 use App\Models\Cartogry;
+use App\Models\RequestBook;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 // use App\Models\Books;
 class BooksController extends Controller
@@ -58,9 +60,9 @@ class BooksController extends Controller
         'copy.required'=>"يجب ادخال طبعة الكتاب الدولي ",
         "catogry.required"=>"يجب اختيار الفئة",
         'file.required'=>"يجب اختيار الملف",
-        "file_up.max"=>"اكبر حجم للملف 50 مجابايت",
+        "file_up.max"=>"اكبر حجم للملف 4 مجابايت",
         "file_up.mimes"=>"الملفات المسموح بها pdf & word",
-        "image_book.max"=>"اكبر حجم لصورة 50 مجابايت",
+        "image_book.max"=>"اكبر حجم لصورة 4 مجابايت",
         "image_book.mimes"=>"الملفات المسموح بها jpg jpeg png"
     ];
     $this->validate($request,$rules,$message);
@@ -151,9 +153,9 @@ class BooksController extends Controller
         'copy.required'=>"يجب ادخال طبعة الكتاب الدولي ",
         "catogry.required"=>"يجب اختيار الفئة",
         'file.required'=>"يجب اختيار الملف",
-        "file_up.max"=>"اكبر حجم للملف 50 مجابايت",
+        "file_up.max"=>"اكبر حجم للملف 4 مجابايت",
         "file_up.mimes"=>"الملفات المسموح بها pdf & word",
-        "image_book.max"=>"اكبر حجم لصورة 50 مجابايت",
+        "image_book.max"=>"اكبر حجم لصورة 4 مجابايت",
         "image_book.mimes"=>"الملفات المسموح بها jpg jpeg png"
     ];
     $this->validate($request,$rules,$message);
@@ -193,6 +195,45 @@ class BooksController extends Controller
     {
         Books::find($delete)->delete();
         return redirect()->back()->with('delete',"تم الحذف بنجاح");
+        
+    }
+
+    public function store_request(Request $request){
+        RequestBook::create([
+        "user_id"=>Auth::id(),
+        "request_url"=>$request->url,
+        "title"=>$request->title,
+        "status"=>0,
+        ]);
+        return 1;
+    }
+
+    public function index_request()
+    {
+       if(Auth::user()->role == 1){
+        $request = RequestBook::select("requests_book.*","users.name")
+        ->leftjoin("users","requests_book.user_id","=","users.id")
+        ->orderBy("id","DESC")->get();
+       }else{
+        $request = RequestBook::select("requests_book.*","users.name")
+        ->leftjoin("users","requests_book.user_id","=","users.id")
+        ->where("user_id",Auth::id())->orderBy("id","DESC")->get();
+       }
+        return view("frontend/requests",["request"=>$request]);
+    }
+
+    public function active_request($id){
+        $request = RequestBook::find($id);
+        $request->update([
+            "status"=>($request->status == 0)?1:0,
+        ]);
+        return redirect()->back()->with('add',"تم التعديل بنجاح");
+    }
+
+    public function destroy_request($delete)
+    {
+        RequestBook::find($delete)->delete();
+        return redirect()->back()->with('add',"تم الحذف بنجاح");
         
     }
 }

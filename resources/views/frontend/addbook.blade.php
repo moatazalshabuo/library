@@ -113,7 +113,7 @@
                           <div class="col-lg-6">
                             <label>صورة الغلاف</label>
                             <fieldset>
-                                <input type="file" name="image_book">
+                                <input type="file"  name="image_book">
                             </fieldset>
                             @error('image_book')
                                 <div class="text-danger">{{ $message }}</div>

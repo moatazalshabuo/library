@@ -52,6 +52,7 @@ class CustomuserController extends Controller
        $query = User::query();
         if(isset($request->name)){
             $query->where('name','like',"%".$request->name."%"); 
+            $query->orWhere('No_academic',$request->name); 
         }
         if(isset($request->status)){
             $query->where('status',$request->status);

@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{{URL::asset('assets/css/animated.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/owl.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     
     <!--
 
@@ -100,6 +102,30 @@ https://templatemo.com/tm-563-seo-dream
   {{-- bootstrap.min --}}
   @yield('script')
   <script>
+ 	
+		Filevalidation = () => {
+			const fi = document.getElementById('file');
+			// Check if any file is selected.
+			if (fi.files.length > 0) {
+				for (const i = 0; i <= fi.files.length - 1; i++) {
+		
+					const fsize = fi.files.item(i).size;
+					const file = Math.round((fsize / 1024));
+					// The size of the file.
+					if (file >= 4096) {
+						alert(
+						"File too Big, please select a file less than 4mb");
+					} else if (file < 2048) {
+						alert(
+						"File too small, please select a file greater than 2mb");
+					} else {
+						document.getElementById('size').innerHTML = '<b>'
+						+ file + '</b> KB';
+					}
+				}
+			}
+		}
+
     $(function(){
       $("select").select2()
     })

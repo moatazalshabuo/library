@@ -112,11 +112,14 @@
                     </a>
                     <ul class="dropdown-menu text-black">
                       <a class="dropdown-item" href="{{ route('user.profile',Auth::id()) }}">البيانات الشخصية</a>
+                      <a class="dropdown-item" href="{{ route("request.index") }}">الكتب المطلوبة</a>
                       @if (Auth::user()->role == 1)
                     <a class="dropdown-item" href="{{ route("user.indexr") }}">المستخدمين</a>
                     <a class="dropdown-item" href="{{ route("user.creater") }}">اضافة مستخدم</a>
+                    @else
+                    <a class="dropdown-item" >عدد النقاط {{Auth::user()->point}}</a>
                     @endif
-                      <hr>
+                    <hr>
                       <a class="dropdown-item" href="{{ route('logout') }}">تسجيل الخروج</a>
                     </ul>
                   </div>
