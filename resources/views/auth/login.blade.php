@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-{{-- <div class="container">
+    {{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -70,62 +70,67 @@
         </div>
     </div>
 </div> --}}
-<div id="about" class="about-us section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="left-image wow fadeInLeft animated" data-wow-duration="1s" data-wow-delay="0.5s" style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: 0.5s; -moz-animation-delay: 0.5s; animation-delay: 0.5s;">
-            <img src="{{URL::asset('assets/images/librarian_2.jpg')}}" alt="">
-          </div>
-        </div>
-        <div class="col-lg-6  wow fadeInRight animated" data-wow-duration="1s" data-wow-delay="0.5s" style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: 0.5s; -moz-animation-delay: 0.5s; animation-delay: 0.5s;">
-            <form id="contact" method="POST" action="{{ route('login') }}">
-                @csrf
-                <div class="row">
-                  <div class="col-lg-6 offset-lg-3">
-                    <div class=" section-heading">
-                      <h6> المكتبة الالكترونية</h6>
-                      <h2>تسجيل الدخول </h2>
+    <div id="about" class="about-us section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="left-image wow fadeInLeft animated" data-wow-duration="1s" data-wow-delay="0.5s"
+                        style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: 0.5s; -moz-animation-delay: 0.5s; animation-delay: 0.5s;">
+                        <img src="{{ URL::asset('assets/images/librarian_2.jpg') }}" alt="">
                     </div>
-                  </div>
+                </div>
+                <div class="col-lg-6  wow fadeInRight animated" data-wow-duration="1s" data-wow-delay="0.5s"
+                    style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: 0.5s; -moz-animation-delay: 0.5s; animation-delay: 0.5s;">
+                    <form id="contact" method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-6 offset-lg-3">
+                                <div class=" section-heading">
+                                    <h6> المكتبة الالكترونية</h6>
+                                    <h2>تسجيل الدخول </h2>
+                                </div>
+                            </div>
 
-                  <div class="col-lg-12" style="text-align:right">
-                        <div class="form-group">
-                            <lable>البريد الالكتروني</lable>
-                            <input  id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="اسم المستخدم" autocomplete="on">
+                            <div class="col-lg-12" style="text-align:right">
+                                <div class="form-group">
+                                    <lable>البريد الالكتروني</lable>
+                                    <input id="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        placeholder="اسم المستخدم" autocomplete="on">
+                                </div>
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <div class="form-group">
+                                    <lable>كلمة المرور</lable>
+                                    <input id="password" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        placeholder="Surname" autocomplete="on">
+                                </div>
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <fieldset>
+                                    <button type="submit" id="form-submit" class="main-button ">تسجيل الدخول</button>
+                                </fieldset>
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        نسيت كلمة المرور
+                                    </a>
+                                @endif
+                                <a class="btn btn-link" href="/register">
+                                    ليس لدي حساب
+                                </a>
+                            </div>
                         </div>
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                        <div class="form-group">
-                            <lable>كلمة المرور</lable>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Surname" autocomplete="on">
-                        </div>
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <fieldset>
-                          <button type="submit" id="form-submit" class="main-button ">تسجيل الدخول</button>
-                        </fieldset>
-                        @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                نسيت كلمة المرور
-                            </a>
-                        @endif
-                        <a class="btn btn-link" href="/register">
-                            ليس لدي حساب
-                        </a>
-                  </div>
+                    </form>
 
                 </div>
-              </form>
-
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 @endsection
