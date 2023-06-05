@@ -54,7 +54,7 @@
                                         <p> </p>
 
                                         <div class="d-flex justify-content-center mt-1">
-                                            <button class="btn btn-primary btn-icon m-1 text-white " id="download"
+                                            <button class="btn btn-primary btn-icon m-1 text-white download" id="{{ $item->id }}"
                                                data-href="upload/book/pdf/{{ $item->file }}"
                                                 ><i
                                                     class="fa fa-download"></i></button>
@@ -136,10 +136,9 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         $(function() {
-        
-            
             var search = "{{$search}}"
             var data = []
+
             if (search != "" || search != undefined) {
                 axios.get('https://www.googleapis.com/books/v1/volumes?q=' + search +
                         '&key=AIzaSyBtgylsdpTaq4SZEdaUsgqy8Qc5XReCjlg')
@@ -208,10 +207,14 @@
                 })
             })
 
-            $("#download").click(function(){
+            $(".download").click(function(){
                 var url = $(this).data('href')
-                axios.get("{{ route('point') }}").then(function(res){
-                    
+                axios.get("{{ route('point') }}",{
+                    params:{
+                        'id_book':$(this).attr('id')
+                    }
+                }).then(function(res){
+
                     if(res.data == 1){
                         Swal.fire({
                                 position: 'top-end',
@@ -220,7 +223,7 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             })
-                            window.open(url, "", "width=800,height=800");
+                            window.open(url, '_blank').focus();
                     }else{
                         Swal.fire({
                                 position: 'top-end',
@@ -228,7 +231,7 @@
                                 title: 'عدد النقاط غير كافي',
                                 showConfirmButton: false,
                                 timer: 1500
-                            }) 
+                            })
                     }
                 }).catch(function(res){
 

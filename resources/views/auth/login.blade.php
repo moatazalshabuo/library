@@ -88,7 +88,7 @@
                       <h2>تسجيل الدخول </h2>
                     </div>
                   </div>
-                  
+
                   <div class="col-lg-12" style="text-align:right">
                         <div class="form-group">
                             <lable>البريد الالكتروني</lable>
@@ -116,11 +116,14 @@
                                 نسيت كلمة المرور
                             </a>
                         @endif
+                        <a class="btn btn-link" href="/register">
+                            ليس لدي حساب
+                        </a>
                   </div>
-                  
+
                 </div>
               </form>
-          
+
         </div>
       </div>
     </div>

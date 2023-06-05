@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Books;
 use App\Models\Cartogry;
 use App\Models\RequestBook;
+use App\Models\RevewBook;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -18,7 +20,7 @@ class BooksController extends Controller
     {
         $book = Books::select()->orderBy('id','DESC')->paginate(15);
         // print_r($book);die();
-        return view('frontend/book',['book'=>$book,"catogry"=>Cartogry::all()]); 
+        return view('frontend/book',['book'=>$book,"catogry"=>Cartogry::all()]);
     }
 
     /**
@@ -26,7 +28,7 @@ class BooksController extends Controller
      */
     public function create()
     {
-        
+
         return view('frontend/addbook',['catogry'=>Cartogry::all()]);
     }
 
@@ -102,14 +104,14 @@ class BooksController extends Controller
     {
        $query = Books::query();
         if(isset($request->name_book)){
-            $query->where('book_name','like',"%".$request->name_book."%"); 
+            $query->where('book_name','like',"%".$request->name_book."%");
         }
         if(isset($request->catogry)){
             $query->where('catogry',$request->catogry);
         }
-        
+
         $data = $query->paginate(15);
-        return view('frontend/book',['book'=>$data,"catogry"=>Cartogry::all()]); 
+        return view('frontend/book',['book'=>$data,"catogry"=>Cartogry::all()]);
     }
 
     /**
@@ -120,7 +122,7 @@ class BooksController extends Controller
         $books = Books::find($id);
         // print_r($books);die();
         return view("frontend/editbook",['data'=>$books,'catogry'=>Cartogry::all()]);
-        
+
     }
 
     /**
@@ -128,7 +130,7 @@ class BooksController extends Controller
      */
     public function update(Request $request,$id)
     {
-     $book = Books::find($id);   
+     $book = Books::find($id);
     $rules = [
         "book_name"=>['required','max:40',"unique:books,book_name,".$id,'string'],
         "autor_name"=>['required','max:40','string'],
@@ -195,7 +197,7 @@ class BooksController extends Controller
     {
         Books::find($delete)->delete();
         return redirect()->back()->with('delete',"تم الحذف بنجاح");
-        
+
     }
 
     public function store_request(Request $request){
@@ -234,6 +236,62 @@ class BooksController extends Controller
     {
         RequestBook::find($delete)->delete();
         return redirect()->back()->with('add',"تم الحذف بنجاح");
-        
+
+    }
+
+    public function revew(){
+        $books = RevewBook::select("books.book_name as name","books.file as url","revewbook.*")->
+        join("books","books.id","=","revewbook.book_id")->where("user_id",Auth::id())->get();
+        return view("frontend/revewPage",compact("books"));
+    }
+    public function revewAdmin(){
+        $books = RevewBook::select("books.book_name as name","users.name as user_name","revewbook.*")->
+        join("books","books.id","=","revewbook.book_id")->join("users","users.id","=","revewbook.user_id")->
+        where("revewbook.status",1)->get();
+        return view("frontend/revewPageAdmin",compact("books"));
+    }
+    public function revewCheck($id){
+        $books = RevewBook::find($id);
+        // echo $books->status;die();
+        if($books->status == 0){
+            return response()->json("evrey thing ok",200);
+        }else{
+            return response()->json("error",412);
+        }
+    }
+    public function revewAdd(Request $request){
+        $request->validate([
+            'revew'=>["required","numeric","min:0","max:5"],
+            "descripe"=>["required"]
+        ],[
+            'revew.required' => "يجب ادخال التقييم",
+            "descripe.required" => "يجب ادخال ملخص الكتاب"
+        ]);
+        RevewBook::find($request->id_revew)->update([
+            'revew'=>$request->revew,
+            "descripe"=>$request->descripe,
+            "status"=>'1'
+        ]);
+    }
+
+    public function revewAccept($id){
+        $book = RevewBook::find($id);
+        $book->update([
+            "status"=>3,
+        ]);
+        $user = User::find($book->user_id);
+        $user->update([
+            "point"=> $user->point + 2,
+        ]);
+        return redirect()->back()->with("mssg","تم الموافقة بنجاح واضافة نقاط المستخدم");
+    }
+
+    public function revewUnAccept($id){
+        RevewBook::find($id)->update([
+            "status"=>0,
+
+        ]);
+
+        return redirect()->back()->with("mssg","تم الرفض");
     }
 }

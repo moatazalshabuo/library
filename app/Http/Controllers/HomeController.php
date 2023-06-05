@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RevewBook;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,16 +36,25 @@ class HomeController extends Controller
 
     public function checkPoint()
     {
-        $user = User::find(Auth::id());
 
-        if($user->point > 0){
-            if($user->role != 1){
-                $user->point = $user->point - 1;
-                $user->update();
-            }
+        $user = User::find(Auth::id());
+        $revew = count(RevewBook::where("book_id",request('id_book'))->get());
+        if($revew > 0){
             return 1;
         }else{
-            return 0;
+            if($user->point > 0){
+                if($user->role != 1){
+                    RevewBook::create([
+                        'book_id'=>request('id_book'),
+                        "user_id"=>Auth::id(),
+                    ]);
+                    $user->point = $user->point - 2;
+                    $user->update();
+                }
+                return 1;
+            }else{
+                return 0;
+            }
         }
     }
     public function addPoint($id)

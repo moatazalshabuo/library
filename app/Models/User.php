@@ -24,7 +24,8 @@ class User extends Authenticatable
         'id_number',
         'No_academic',
         "role",
-        "status"
+        "status",
+        "point"
     ];
 
     /**
@@ -45,4 +46,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role(){
+        switch ($this->role) {
+            case '1':
+                return "الادمن الرئيسي";
+                break;
+            case '2':
+                return "مدرس";
+                break;
+            case '3':
+                return "طالب";
+                break;
+
+        }
+    }
+
+    public function Revew(){
+        return count(RevewBook::where("user_id",$this->id)->get());
+    }
+
+    public function RevewDone(){
+        return count(RevewBook::where(["user_id"=>$this->id,"status"=>1])->get());
+    }
 }

@@ -12,7 +12,7 @@
     <title>@yield('title')</title>
 
     <!-- Bootstrap core CSS -->
-    
+
     <link href="{{URL::asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
@@ -25,7 +25,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    
+
     <!--
 
 TemplateMo 563 SEO Dream
@@ -35,15 +35,15 @@ https://templatemo.com/tm-563-seo-dream
 -->
 @yield('style')
 <style>
-@import url(https://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+/* @import url(https://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
  *{
   font-family: 'Droid Arabic Kufi', serif;
-}
+} */
   .dropdown-item{
     color: #33ccc5 !important;
     text-align: right !important;
     width: 100%;
-  } 
+  }
   .dropdown hr{
     background-color: #33ccc5 !important;
     margin: 0px;
@@ -82,8 +82,8 @@ https://templatemo.com/tm-563-seo-dream
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <p>Copyright © 2021 SEO Dream Co., Ltd. All Rights Reserved. 
-          
+          <p>Copyright © 2021 SEO Dream Co., Ltd. All Rights Reserved.
+
           <br>Web Designed by <a rel="nofollow" title="free CSS templates">TemplateMo</a></p>
         </div>
       </div>
@@ -102,13 +102,13 @@ https://templatemo.com/tm-563-seo-dream
   {{-- bootstrap.min --}}
   @yield('script')
   <script>
- 	
+
 		Filevalidation = () => {
 			const fi = document.getElementById('file');
 			// Check if any file is selected.
 			if (fi.files.length > 0) {
 				for (const i = 0; i <= fi.files.length - 1; i++) {
-		
+
 					const fsize = fi.files.item(i).size;
 					const file = Math.round((fsize / 1024));
 					// The size of the file.

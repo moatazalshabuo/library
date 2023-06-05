@@ -45,6 +45,14 @@ Route::post("store/request", [BooksController::class, "store_request"])->name("r
 Route::get("index/request", [BooksController::class, "index_request"])->name("request.index")->middleware("auth", "active");
 Route::get("index/active/{id}", [BooksController::class, "active_request"])->name("request.active")->middleware("auth", "active");
 Route::get("index/destroy/{id}", [BooksController::class, "destroy_request"])->name("request.destroy")->middleware("auth", "active");
+Route::get("books/revew", [BooksController::class, "revew"])->name("revew.book")->middleware("auth", "active");
+Route::get("books/revew/check/{id}", [BooksController::class, "revewCheck"])->name("revew.check")->middleware("auth", "active");
+Route::post("books/revew/add", [BooksController::class, "revewAdd"])->name("add.revew")->middleware("auth", "active");
+Route::get("books/revew-admin", [BooksController::class, "revewAdmin"])->name("revewadmin.book")->middleware("auth", "active");
+Route::get("books/revew-admin/accept/{id}", [BooksController::class, "revewAccept"])->name("revewaccept.book")->middleware("auth", "active");
+Route::get("books/revew-admin/unaccept/{id}", [BooksController::class, "revewUnAccept"])->name("revewunaccept.book")->middleware("auth", "active");
+
+
 
 Route::controller(Scientific_journalController::class)->group(function () {
   Route::middleware(["auth", 'active'])->group(function () {
