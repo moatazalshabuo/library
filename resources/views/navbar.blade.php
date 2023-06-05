@@ -7,7 +7,7 @@
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
             <a href="{{ route('home') }}" class="logo">
-              
+
               <h4>المكتبة الالكترونية <img src="{{URL::asset('assets/images/logo-icon.png')}}" alt=""></h4>
             </a>
             <!-- ***** Logo End ***** -->
@@ -18,7 +18,7 @@
               <li class="scroll-to-section"><a href="{{ route('book.index') }}">الكتب</a></li>
               <li class="scroll-to-section"><a href="{{ route("indexPeper") }}">الاوراق العلمية</a></li>
               <li class="scroll-to-section"><a href="{{ route("Scie") }}">المجلات العلمية</a></li>
-              <li class="scroll-to-section"><a href="{{ route('departs.show') }}">المقررات الدراسية</a></li>    
+              <li class="scroll-to-section"><a href="{{ route('departs.show') }}">المقررات الدراسية</a></li>
               @endif
 
               @if (Auth::user()->role == 2)
@@ -30,7 +30,7 @@
                   <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     الاورق العلمية
                   </a>
-                
+
                   <ul class="dropdown-menu text-black">
                     <a class="dropdown-item" href="{{route('add_pepertech')}}"> اضافة ورقة علمية</a>
                     <hr>
@@ -38,17 +38,17 @@
                   </ul>
                 </div>
               </li>
-              <li class="scroll-to-section"><a href="{{ route('departs.show') }}">المقررات الدراسية</a></li>    
+              <li class="scroll-to-section"><a href="{{ route('departs.show') }}">المقررات الدراسية</a></li>
               @endif
               @if (Auth::user()->role == 1)
               <li class="scroll-to-section"><a href="{{ route('home') }}" class="">الرئيسية</a></li>
-              
+
               <li class="scroll-to-section">
                 <div class="dropdown">
                   <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     الكتب
                   </a>
-                
+
                   <ul class="dropdown-menu ">
                     <a class="dropdown-item text-dark" href="{{route('book.create')}}">اضافة</a>
                     <hr>
@@ -61,7 +61,7 @@
                   <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     المجلات العلمية
                   </a>
-                
+
                   <ul class="dropdown-menu text-black">
                     <a class="dropdown-item" href="{{ route('addScie') }}">اضافة</a>
                     <hr>
@@ -72,9 +72,9 @@
               <li class="scroll-to-section">
                 <div class="dropdown">
                   <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  الرسائل العلمية 
+                  الرسائل العلمية
                   </a>
-                
+
                   <ul class="dropdown-menu text-black">
                     <a class="dropdown-item" href="{{ route('add_peper') }}">اضافة رسالة علمية</a>
                     <hr>
@@ -88,7 +88,7 @@
                   <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   المقررات الدراسية
                   </a>
-                
+
                   <ul class="dropdown-menu text-black">
                     <a class="dropdown-item" href="{{ route("depart.index") }}">الاقسام العلمية</a>
                     <a class="dropdown-item" href="{{ route("course_index") }}">المقررات الدراسية</a>
@@ -98,11 +98,11 @@
                   </ul>
                 </div>
                 </li>
-               
+
               @endif
               @auth
-                  
-              
+
+
                 {{-- <li class="scroll-to-section"><a href="">Change password</a></li>  --}}
                 {{-- <li class="scroll-to-section"><div class="main-blue-button"><a href="">logout</a></div></li>     --}}
                 <li class="scroll-to-section">
@@ -115,6 +115,7 @@
                       <a class="dropdown-item" href="{{ route("request.index") }}">الكتب المطلوبة</a>
                       @if (Auth::user()->role == 1)
                     <a class="dropdown-item" href="{{ route("user.indexr") }}">المستخدمين</a>
+                    <a class="dropdown-item" href="{{ route("revewadmin.book") }}">المراجعات</a>
                     <a class="dropdown-item" href="{{ route("user.creater") }}">اضافة مستخدم</a>
                     @else
                     <a class="dropdown-item" >عدد النقاط {{Auth::user()->point}}</a>
@@ -125,7 +126,7 @@
                   </div>
                   </li>
                 @endauth
-              </ul>        
+              </ul>
             <a class="menu-trigger">
                 <span>Menu</span>
             </a>
@@ -136,4 +137,3 @@
     </div>
   </header>
   <!-- ***** Header Area End ***** -->
- 
